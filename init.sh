@@ -6,6 +6,8 @@ sudo ln -s /usr/bin/python3.5 /usr/bin/python3
 sudo python3 -m pip install gunicorn
 sudo python3 -m pip install django==2.0
 sudo python3 -m pip install mysqlclient
+sudo apt remove libapache2-mod-python libapache2-mod-wsgi
+sudo apt install libapache2-mod-wsgi-py3
 
 sudo ln -s /home/box/web/etc/nginx.conf  /etc/nginx/sites-enabled/test.conf
 sudo rm /etc/nginx/sites-enabled/default
@@ -17,7 +19,17 @@ sudo /etc/init.d/nginx restart
 #cd /home/box/web
 #gunicorn --bind='0.0.0.0:8080' hello:app
 
-#cd /home/box/web/ask
-#gunicorn --bind='0.0.0.0:8000' ask.wsgi
 
 sudo /etc/init.d/mysql start
+
+sudo mysql -uroot -e "create database djangodb;"
+sudo mysql -uroot -e "CREATE USER 'djuser'@'%' IDENTIFIED BY '1234';"
+sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON djangodb.* TO 'djuser'@'%';"
+
+
+
+cd /home/box/web/ask
+./manage.py makemigrations qa
+./manage.py migrate
+
+gunicorn --bind='0.0.0.0:8000' ask.wsgi
