@@ -20,11 +20,11 @@ sudo /etc/init.d/nginx restart
 #gunicorn --bind='0.0.0.0:8080' hello:app
 
 
-sudo /etc/init.d/mysql start
+#sudo /etc/init.d/mysql start
 
-sudo mysql -uroot -e "create database djangodb;"
-sudo mysql -uroot -e "CREATE USER 'djuser'@'%' IDENTIFIED BY '1234';"
-sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON djangodb.* TO 'djuser'@'%';"
+#sudo mysql -uroot -e "create database djangodb;"
+#sudo mysql -uroot -e "CREATE USER 'djuser'@'%' IDENTIFIED BY '1234';"
+#sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON djangodb.* TO 'djuser'@'%';"
 
 
 
