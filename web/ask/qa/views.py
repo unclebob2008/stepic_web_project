@@ -21,8 +21,18 @@ def topnew(request):
         qs = paginator.page(paginator.num_pages)
     return render(request, 'new.html', {'posts': qs})
 
-def toppop(request, *args, **kwargs):
-    return HttpResponse('TOPpop')
+def toppop(request):
+    limit = 10
+    page = request.GET.get('page', 1)
+    posts = Question.objects.popular()
+    paginator = Paginator(posts, limit)
+    try:
+        qs = paginator.page(page)
+    except PageNotAnInteger:
+        qs = paginator.page(1)
+    except EmptyPage:
+        qs = paginator.page(paginator.num_pages)
+    return render(request, 'new.html', {'posts': qs})
 
 def quone(request, *args, **kwargs):
     qid = args[0]

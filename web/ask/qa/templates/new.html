@@ -5,9 +5,7 @@
 <body>
 
 {% for post in posts %}
-    {# Each "post" is a post model object. #}
-    {{ post.title }}<br />
-    ...
+    {{ post.title }}   <a href="/question/{{ post.pk }}/">{{ post.title }}</a><br />
 {% endfor %}
 
 <div class="pagination">
