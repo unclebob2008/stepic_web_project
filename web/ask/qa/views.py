@@ -25,4 +25,10 @@ def toppop(request, *args, **kwargs):
     return HttpResponse('TOPpop')
 
 def quone(request, *args, **kwargs):
-    return HttpResponse('Quest 1')
+    qid = args[0]
+    try:
+        q = Question.objects.get(pk=qid)
+        ans = Answer.objects.filter(question__pk=qid)
+    except Question.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'quone.html', {'title': q.title, 'text': q.text, 'ans': ans})

@@ -17,7 +17,7 @@ from django.conf.urls import url
 from qa.views import *
 
 urlpatterns = [
-    url(r'^question/\d+/', quone, name='question'),
+    url(r'^question/(\d+)/$', quone, name='question'),
     url(r'^popular/', toppop, name='popular'),
     url(r'^$', topnew, name='topnew'),
 ]

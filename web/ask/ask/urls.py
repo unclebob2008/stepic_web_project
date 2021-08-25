@@ -27,10 +27,11 @@ urlpatterns = [
     url(r'^popular/', include('qa.urls'), name='popular'),
     url(r'^new/', include('qa.urls'), name='new'),
 ]
+
 """
 
 urlpatterns = [
-    url(r'^$', topnew, name='topnew'),
-    url(r'^question/\d+/', quone, name='question'),
+    url(r'^question/(\d+)/$', quone, name='question'),
     url(r'^popular/', toppop, name='popular'),
+    url(r'^$', topnew, name='topnew'),
 ]
